@@ -82,7 +82,7 @@ export default function Home() {
               {userInfo ? (
                 <>
                   <span className="text-gray-700 text-sm font-medium mr-2 hidden md:block">Welcome, <span className="font-bold">{userInfo.name.split(' ')[0]}</span></span>
-                  <Link href={userInfo.role === 'entrepreneur' ? '/dashboard/entrepreneur' : userInfo.role === 'admin' ? '/dashboard/admin' : '/dashboard'} className="text-gray-600 hover:text-primary-600 text-sm font-bold transition-colors">
+                  <Link href="/dashboard" className="text-gray-600 hover:text-primary-600 text-sm font-bold transition-colors">
                     Dashboard
                   </Link>
                   <button onClick={handleLogout} className="bg-red-50 text-red-600 px-5 py-2 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors shadow-sm ml-2">

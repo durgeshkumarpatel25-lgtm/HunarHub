@@ -21,14 +21,8 @@ export default function Login() {
       
       if (res.ok) {
         localStorage.setItem('userInfo', JSON.stringify(data));
-        // Redirect based on role
-        if (data.role === 'entrepreneur') {
-          router.push('/dashboard/entrepreneur');
-        } else if (data.role === 'admin') {
-          router.push('/dashboard/admin');
-        } else {
-          router.push('/'); // Default customer or other
-        }
+        // Redirect everyone to the unified dashboard
+        router.push('/dashboard');
       } else {
         setError(data.message || 'Login failed');
       }
