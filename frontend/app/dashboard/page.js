@@ -84,33 +84,73 @@ export default function Dashboard() {
           <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>
           <p className="text-sm text-gray-500 capitalize">{user.role} Account</p>
         </div>
+        
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+          {user?.role === 'entrepreneur' && (
+            <>
+              <button 
+                onClick={() => setActiveTab('orders')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${activeTab === 'orders' ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg shadow-primary-500/30' : 'text-gray-600 hover:bg-white hover:text-primary-600 hover:shadow-sm'}`}
+              >
+                <Package size={20} />
+                <span>My Orders</span>
+              </button>
+              <button 
+                onClick={() => setActiveTab('requests')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${activeTab === 'requests' ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg shadow-primary-500/30' : 'text-gray-600 hover:bg-white hover:text-primary-600 hover:shadow-sm'}`}
+              >
+                <MessageSquare size={20} />
+                <span>Service Requests</span>
+              </button>
+              <button 
+                onClick={() => setActiveTab('profile')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${activeTab === 'profile' ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg shadow-primary-500/30' : 'text-gray-600 hover:bg-white hover:text-primary-600 hover:shadow-sm'}`}
+              >
+                <User size={20} />
+                <span>Profile Settings</span>
+              </button>
+            </>
+          )}
 
-        <nav className="p-4 space-y-1">
-          <button
-            onClick={() => setActiveTab('orders')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${activeTab === 'orders' ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-50'}`}
-          >
-            <Package size={18} /> Orders
-          </button>
-          <button
-            onClick={() => setActiveTab('requests')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${activeTab === 'requests' ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-50'}`}
-          >
-            <Calendar size={18} /> Service Requests
-          </button>
-          <button
-            onClick={() => setActiveTab('settings')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${activeTab === 'settings' ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-50'}`}
-          >
-            <Settings size={18} /> Settings
-          </button>
+          {user?.role === 'customer' && (
+            <>
+              <button 
+                onClick={() => setActiveTab('orders')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${activeTab === 'orders' ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg shadow-primary-500/30' : 'text-gray-600 hover:bg-white hover:text-primary-600 hover:shadow-sm'}`}
+              >
+                <ShoppingBag size={20} />
+                <span>My Purchases</span>
+              </button>
+              <button 
+                onClick={() => setActiveTab('requests')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium ${activeTab === 'requests' ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg shadow-primary-500/30' : 'text-gray-600 hover:bg-white hover:text-primary-600 hover:shadow-sm'}`}
+              >
+                <MessageSquare size={20} />
+                <span>My Requests</span>
+              </button>
+            </>
+          )}
 
-          <div className="pt-4 mt-4 border-t border-gray-100">
-            <button
-              onClick={handleLogout}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+          {user?.role === 'admin' && (
+            <div className="px-4 py-3 text-sm text-gray-500 font-medium">
+              Admin features coming soon
+            </div>
+          )}
+
+          <div className="pt-8 mt-8 border-t border-gray-100/50">
+            <Link 
+              href="/"
+              className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-white hover:text-primary-600 hover:shadow-sm rounded-xl transition-all font-medium"
             >
-              <LogOut size={18} /> Logout
+              <Settings size={20} />
+              <span>Back to Home</span>
+            </Link>
+            <button 
+              onClick={handleLogout}
+              className="w-full flex items-center space-x-3 px-4 py-3 mt-2 text-red-600 hover:bg-red-50 hover:shadow-sm rounded-xl transition-all font-medium"
+            >
+              <LogOut size={20} /> 
+              <span>Logout</span>
             </button>
           </div>
         </nav>

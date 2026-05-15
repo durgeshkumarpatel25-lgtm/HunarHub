@@ -53,37 +53,46 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen relative">
+      {/* Dynamic Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+        <div className="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-float"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
+      </div>
+
       {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-primary-100 shadow-sm">
+      <nav className="bg-white/70 backdrop-blur-xl sticky top-0 z-50 border-b border-white/50 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-bold text-primary-600 tracking-tight">HunarHub</span>
+          <div className="flex justify-between h-20 items-center">
+            <div className="flex-shrink-0 flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-to-tr from-primary-500 to-accent rounded-xl flex items-center justify-center shadow-lg transform -rotate-3">
+                <span className="text-xl font-bold text-white">H</span>
+              </div>
+              <span className="text-2xl font-extrabold text-gray-900 tracking-tight">Hunar<span className="text-primary-600">Hub</span></span>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link href="/" className="border-primary-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              <Link href="/" className="text-gray-900 font-semibold relative after:absolute after:bottom-[-26px] after:left-0 after:h-[3px] after:w-full after:bg-primary-500">
                 Home
               </Link>
-              <Link href="/entrepreneurs" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                Categories
+              <Link href="/entrepreneurs" className="text-gray-500 hover:text-gray-900 font-medium transition-colors">
+                Discover
               </Link>
             </div>
             <div className="flex items-center space-x-4">
               {userInfo ? (
                 <>
-                  <span className="text-gray-700 text-sm font-medium mr-2">Hi, {userInfo.name.split(' ')[0]}</span>
-                  <Link href={userInfo.role === 'entrepreneur' ? '/dashboard/entrepreneur' : userInfo.role === 'admin' ? '/dashboard/admin' : '/dashboard'} className="text-gray-500 hover:text-gray-700 text-sm font-medium">
+                  <span className="text-gray-700 text-sm font-medium mr-2 hidden md:block">Welcome, <span className="font-bold">{userInfo.name.split(' ')[0]}</span></span>
+                  <Link href={userInfo.role === 'entrepreneur' ? '/dashboard/entrepreneur' : userInfo.role === 'admin' ? '/dashboard/admin' : '/dashboard'} className="text-gray-600 hover:text-primary-600 text-sm font-bold transition-colors">
                     Dashboard
                   </Link>
-                  <button onClick={handleLogout} className="bg-red-50 text-red-600 px-4 py-2 rounded-full text-sm font-medium hover:bg-red-100 transition-colors shadow-sm">
+                  <button onClick={handleLogout} className="bg-red-50 text-red-600 px-5 py-2 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors shadow-sm ml-2">
                     Log out
                   </button>
                 </>
               ) : (
                 <>
-                  <Link href="/login" className="text-gray-500 hover:text-gray-700 text-sm font-medium">Log in</Link>
-                  <Link href="/register" className="bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-primary-700 transition-colors shadow-md hover:shadow-lg">
+                  <Link href="/login" className="text-gray-600 hover:text-primary-600 text-sm font-bold transition-colors">Log in</Link>
+                  <Link href="/register" className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:from-primary-500 hover:to-primary-400 transition-all shadow-lg shadow-primary-500/30 transform hover:-translate-y-0.5">
                     Sign up
                   </Link>
                 </>
@@ -94,38 +103,39 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-primary-50 pb-16 pt-20 lg:pb-24 lg:pt-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-            Empowering <span className="text-primary-600">Local Talent</span>
+      <div className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 border border-primary-100 text-primary-700 font-semibold text-sm mb-8 shadow-sm">
+            <span className="flex h-2 w-2 rounded-full bg-primary-500 animate-pulse"></span>
+            Empowering Local Talent
+          </div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 mb-6">
+            Discover the <br className="hidden md:block" />
+            <span className="text-gradient">Master Craftsmen</span> Near You
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
-            Discover and support skilled micro-entrepreneurs in your community. From custom tailoring to handmade pottery, find authentic services and products.
+          <p className="mx-auto max-w-2xl text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
+            Connect directly with skilled micro-entrepreneurs in your community. From bespoke tailoring to authentic handmade pottery, experience premium local services.
           </p>
           
-          <div className="mt-10 max-w-xl mx-auto">
-            <form onSubmit={handleSearch} className="relative flex items-center w-full h-14 rounded-full focus-within:shadow-lg bg-white overflow-hidden shadow-md border border-gray-100">
-              <div className="grid place-items-center h-full w-12 text-gray-400">
-                <Search size={20} />
+          <div className="max-w-2xl mx-auto glass-panel p-2 rounded-2xl shadow-2xl">
+            <form onSubmit={handleSearch} className="relative flex items-center w-full h-16 rounded-xl bg-white overflow-hidden">
+              <div className="grid place-items-center h-full w-16 text-primary-500">
+                <Search size={24} />
               </div>
               <input
-                className="peer h-full w-full outline-none text-sm text-gray-700 pr-2 bg-transparent"
+                className="peer h-full w-full outline-none text-base text-gray-700 pr-2 bg-transparent font-medium"
                 type="text"
                 id="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for cobblers, tailors, potters..." 
+                placeholder="Search for tailors, potters, artisans..." 
               />
-              <button type="submit" className="bg-primary-600 text-white px-6 h-full font-medium hover:bg-primary-700 transition-colors">
+              <button type="submit" className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 h-full font-bold hover:opacity-90 transition-opacity mr-1 rounded-xl">
                 Search
               </button>
             </form>
           </div>
         </div>
-        
-        {/* Decorative background shapes */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-primary-200 opacity-50 blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-secondary opacity-20 blur-3xl"></div>
       </div>
 
       {/* Categories */}

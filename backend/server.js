@@ -8,8 +8,15 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 // Configure CORS for production deployment later if needed by specifying origin
+const allowedOrigins = [process.env.CLIENT_URL, 'http://localhost:3000', 'http://127.0.0.1:3000'].filter(Boolean);
 app.use(cors({
-  origin: process.env.CLIENT_URL || '*', // Allow all origins for dev, change to specific frontend URL in prod
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
